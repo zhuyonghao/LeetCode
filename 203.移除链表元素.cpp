@@ -15,6 +15,7 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+/*
 class Solution
 {
 public:
@@ -42,6 +43,31 @@ public:
                 cur = cur->next;
         }
         return head;
+    }
+};
+*/
+// 虚拟头节点
+class Solution
+{
+public:
+    ListNode *removeElements(ListNode *head, int val)
+    {
+        ListNode *dummyHead = new ListNode();
+
+        dummyHead->next = head;
+
+        ListNode *cur = dummyHead;
+
+        // 此时不需要考虑头节点为空的情况
+        while (cur->next != nullptr)
+        {
+            if (cur->next->val == val)
+                cur->next = cur->next->next;
+            else
+                cur = cur->next;
+        }
+
+        return dummyHead->next;
     }
 };
 // @lc code=end
