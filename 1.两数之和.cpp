@@ -22,6 +22,7 @@ public:
 };
 */
 
+/*
 // 哈希表
 class Solution
 {
@@ -51,5 +52,52 @@ public:
         return {};
     }
 };
+*/
 
+// 双指针
+class Solution
+{
+public:
+    vector<int> twoSum(vector<int> &nums, int target)
+    {
+        // 排序后下标发生变化
+        // 故将其存入hash table
+        // 但是具有重复元素哈希表失效
+        // 所以此题需要在无重复元素的情况下
+
+        // 去重
+        vector<int> result;
+
+        for (int i = 0; i < nums.size(); i++)
+            if (nums[i] == target / 2)
+            {
+                result.push_back(i);
+                if (result.size() == 2)
+                    return result;
+            }
+
+        map<int, int> Map;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            Map[nums[i]] = i;
+        }
+        // 排序
+        sort(nums.begin(), nums.end());
+        // 定义左右指针
+        int left = 0;
+        int right = nums.size() - 1;
+        // 移动指针直至指针相等
+        while (left <= right)
+        {
+            if (nums[left] + nums[right] == target)
+                return {Map[nums[left]], Map[nums[right]]};
+            else if (nums[left] + nums[right] < target)
+                left++;
+            else
+                right--;
+        }
+
+        return {};
+    }
+};
 // @lc code=end
