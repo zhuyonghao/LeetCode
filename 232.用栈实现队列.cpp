@@ -14,19 +14,42 @@ public:
 
     void push(int x)
     {
+        stackIn.push(x);
     }
 
     int pop()
     {
+        // 当出栈为空时，将进栈元素移到出栈，否则顺序错误
+        if (stackOut.empty())
+        {
+            // 将进栈元素移空
+            while (!stackIn.empty())
+            {
+                stackOut.push(stackIn.top());
+                stackIn.pop();
+            }
+        }
+        int result = stackOut.top();
+        stackOut.pop();
+        return result;
     }
 
     int peek()
     {
+        int result = pop();
+        stackOut.push(result);
+        return result;
     }
 
+    // 两者都为空时，队列才为空
     bool empty()
     {
+        return stackOut.empty() && stackIn.empty();
     }
+
+private:
+    stack<int> stackIn;
+    stack<int> stackOut;
 };
 
 /**
