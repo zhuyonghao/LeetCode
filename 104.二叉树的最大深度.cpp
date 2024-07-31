@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=226 lang=cpp
+ * @lc app=leetcode.cn id=104 lang=cpp
  *
- * [226] 翻转二叉树
+ * [104] 二叉树的最大深度
  */
 
 // @lc code=start
@@ -20,20 +20,20 @@ class Solution
 {
 public:
     // 参数和返回类型
-    TreeNode *invertTree(TreeNode *root)
+    int maxDepth(TreeNode *root)
     {
-        // 终止条件
+        // 如果传递到根节点返回0
         if (root == nullptr)
-            return root;
-        // 处理逻辑
-        // 前序：中左右
-        // 后序：左右中
-        // 中序：左边处理了两次
-        swap(root->left, root->right);
-        invertTree(root->left);
-        invertTree(root->right);
-        // 返回翻转后的根节点
-        return root;
+            return 0;
+        // 后序遍历：左右中
+        // 左子树的最大深度
+        int left = maxDepth(root->left);
+        // 右子树的最大深度
+        int right = maxDepth(root->right);
+        // 中: 处理
+        int height = max(left, right) + 1;
+        // 返回
+        return height;
     }
 };
 // @lc code=end
