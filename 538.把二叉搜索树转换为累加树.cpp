@@ -19,8 +19,30 @@
 class Solution
 {
 public:
+    // 使用双指针进行运算
+    int pre = 0;
+
+    void traversal(TreeNode *cur)
+    {
+        // 当遇到空节点返回
+        if (cur == nullptr)
+            return;
+
+        // 右中左
+        // 先向右遍历找到最大值
+        traversal(cur->right);
+
+        // 中：进行累加
+        cur->val += pre;
+        // 更新pre
+        pre = cur->val;
+        // 向左遍历
+        traversal(cur->left);
+    }
     TreeNode *convertBST(TreeNode *root)
     {
+        traversal(root);
+        return root;
     }
 };
 // @lc code=end
