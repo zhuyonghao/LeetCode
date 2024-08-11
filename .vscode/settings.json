@@ -8,6 +8,7 @@
         "string": "cpp",
         "unordered_map": "cpp",
         "initializer_list": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "limits": "cpp"
     }
 }
